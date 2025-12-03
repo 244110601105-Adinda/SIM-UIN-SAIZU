@@ -7,26 +7,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-    body { background-color:#eef6f0; display:flex; justify-content:center; align-items:center; height:100vh; }
-    .login-container { background: rgba(255, 255, 255, 0.4); border-radius:20px; padding:50px 60px; width:420px; box-shadow:0 8px 20px rgba(0,0,0,0.08); text-align:center; }
-    h2 { color:#1b5e20; margin-bottom:20px; font-size:22px; font-weight:700; }
-    .form-group { text-align:left; margin-bottom:20px; }
-    label { display:block; color:#333; font-weight:500; font-size:14px; margin-bottom:6px; }
-    input, select { width:100%; padding:12px; border-radius:10px; border:1.5px solid #cde2d2; font-size:14px; outline:none; background:#f9fcfa; }
-    input:focus, select:focus { border-color:#1b5e20; }
-    .login-btn { width:100%; padding:12px; background-color:#00a884; border:none; color:white; border-radius:30px; font-weight:600; font-size:15px; cursor:pointer; margin-top:10px; }
-    .login-btn:hover { background-color:#009070; }
-    .back-link { margin-top:15px; display:inline-block; color:#2e7d32; text-decoration:none; font-size:14px; font-weight:500; }
-    .back-link:hover { color:#1b5e20; }
 
     body {
-  margin: 0;
-  background-image: url('asrama.jpg'); /* ganti dengan gambar mu */
-  background-size: cover;        /* biar full */
-  background-position: center;   /* biar rapi */
-  background-repeat: no-repeat;  /* jangan diulang */
-  height: 100vh;                 /* full layar */
-}
+      background: url('uinsaizup.jpeg.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position: relative;
+    }
+
+    /* Overlay Blur Background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 1;
+    }
+
+    .login-container {
+      background: rgb(255, 255, 255);
+      border-radius:20px;
+      padding:50px 60px;
+      width:420px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.15);
+      text-align:center;
+      position: relative;
+      z-index: 2; /* supaya di atas blur */
+    }
+
+    h2 { color:#1b5e20; margin-bottom:20px; font-size:22px; font-weight:700; }
+
+    .form-group { text-align:left; margin-bottom:20px; }
+
+    label { display:block; color:#333; font-weight:500; font-size:14px; margin-bottom:6px; }
+
+    input, select {
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1.5px solid #cde2d2;
+      font-size:14px;
+      outline:none;
+      background:#f9fcfa;
+    }
+
+    input:focus, select:focus { border-color:#1b5e20; }
+
+    .login-btn {
+      width:100%;
+      padding:12px;
+      background-color:#00a884;
+      border:none;
+      color:white;
+      border-radius:30px;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    .login-btn:hover { background-color:#009070; }
+
+    .back-link {
+      margin-top:15px;
+      display:inline-block;
+      color:#2e7d32;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .back-link:hover { color:#1b5e20; }
   </style>
 </head>
 <body>
@@ -56,12 +111,6 @@
   </div>
 
   <script>
-    function login() {
-      let username = document.getElementById("username").value;
-      let password = document.getElementById("password").value;
-      let role = document.getElementById("role").value;
-    }
-
     document.getElementById("btnLogin").addEventListener("click", function () {
       let email = document.getElementById("email").value.trim();
       let password = document.getElementById("password").value.trim();
@@ -76,15 +125,13 @@
         return;
       }
 
-      // Simpan status login
       localStorage.setItem("isLogin", "true");
       localStorage.setItem("username", email);
       localStorage.setItem("role", role);
 
-      // redirect berdasarkan role
       if (role === "admin") {
         window.location.href = "dashboard_admin.html";
-      } else if (role === "superadmin") {
+      } else {
         window.location.href = "superadmin.html";
       }
     });
