@@ -48,7 +48,7 @@
       display: flex; justify-content: space-between; align-items: center;
       background: #ffffff; padding: 14px 24px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 30px;
     }
-    .navbar h2 { color: #006d55; font-size:22x; display: flex; align-items: center; gap: 10px; }
+    .navbar h2 { color: #006d55; font-size:22px; display: flex; align-items: center; gap: 10px; }
     .navbar .user { display: flex; align-items: center; gap: 10px; background-color: #e8f3ef; padding: 6px 15px; border-radius: 30px; }
     .user-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
     .user span { color: #006d55; font-weight: 500; }
@@ -67,16 +67,9 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-    .sidebar {
-        width: 220px;   /* lebih kecil */
-        position: fixed;
-        z-index: 9999;  /* paling depan */
+      .sidebar { width: 220px; position: fixed; z-index: 9999; }
+      .content { margin-left: 0; }
     }
-
-    .content {
-        margin-left: 0; /* biar turun */
-    }
-}
   </style>
 </head>
 <body>
@@ -89,6 +82,7 @@
       <li><a href="pembayaran.html"><i class="fa-solid fa-wallet"></i> Pembayaran</a></li>
       <li><a href="jadwaluser.html"><i class="fa-solid fa-calendar-days"></i> Jadwal Kegiatan</a></li>
       <li><a href="riwayat.html"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat</a></li>
+      <li><a href="laporan_penghuni.html"><i class="fa-solid fa-file-lines"></i> Laporan Penghuni</a></li>
     </ul>
     <button class="logout-btn" onclick="logout()">Logout</button>
   </aside>
@@ -115,7 +109,6 @@
   </main>
 
   <script>
-    // Toggle sidebar
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
       const mainContent = document.querySelector('.main-content');
@@ -123,16 +116,13 @@
       mainContent.classList.toggle('fullscreen');
     }
 
-    // Cek login
     if(localStorage.getItem("isLogin") !== "true") {
       alert("Silakan login terlebih dahulu!");
       window.location.href = "login_user.html";
     }
 
-    // Tampilkan nama user
     document.getElementById("username").innerText = localStorage.getItem("username") || "Penghuni";
 
-    // Logout
     function logout() {
       if(confirm("Yakin ingin keluar?")) {
         localStorage.removeItem("isLogin");
